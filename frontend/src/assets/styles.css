@@ -1,0 +1,543 @@
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #f5f5f5;
+    width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .chat-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+  }
+  
+  .avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    border: 2px solid #e8a7ff;
+  }
+  
+  .user-info h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .status {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #666;
+  }
+  
+  .search-icon {
+    margin-left: auto;
+    font-size: 18px;
+    color: #757575;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .search-icon:hover {
+    color: #e8a7ff;
+    background: rgba(232, 167, 255, 0.1);
+  }
+  
+  .chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .message-bubble {
+    max-width: 70%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .sent {
+    align-self: flex-end;
+    background: #e8a7ff;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  
+  .received {
+    align-self: flex-start;
+    background: #fff;
+    color: #333;
+    border-bottom-left-radius: 4px;
+  }
+  
+  .timestamp {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 4px;
+    display: block;
+  }
+  
+  .typing-indicator {
+    font-style: italic;
+    color: #666;
+    margin: 8px 0;
+    font-size: 13px;
+    padding-left: 12px;
+  }
+  
+  .chat-input {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: #fff;
+    border-top: 1px solid #e0e0e0;
+    gap: 12px;
+  }
+  
+  input {
+    flex-grow: 1;
+    padding: 12px 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 25px;
+    outline: none;
+    font-size: 15px;
+    background: #f8f8f8;
+    transition: all 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: #e8a7ff;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(232, 167, 255, 0.1);
+  }
+  
+  .input-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .input-icon {
+    font-size: 20px;
+    cursor: pointer;
+    color: #757575;
+    transition: all 0.3s ease;
+    padding: 8px;
+    border-radius: 50%;
+    width: 24px;
+    text-align: center;
+  }
+  
+  .input-icon:hover {
+    color: #e8a7ff;
+    background: rgba(232, 167, 255, 0.1);
+  }
+  
+  .send-button {
+    background: #e8a7ff;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(232, 167, 255, 0.4);
+  }
+  
+  .send-button:hover {
+    background: #d18fff;
+    transform: scale(1.05);
+  }
+  
+  .send-icon {
+    font-size: 18px;
+    color: white;
+  }
+  
+  .modal-overlay, .emoji-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  .attachment-modal, .emoji-modal, .search-modal {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    width: 350px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .emoji-modal {
+    width: 380px;
+    max-height: 500px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .search-modal {
+    width: 400px;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .close-btn:hover {
+    background: #f5f5f5;
+    color: #333;
+  }
+  
+  .attachment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .attachment-option {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #f8f8f8;
+  }
+  
+  .attachment-option:hover {
+    background: #f0f0f0;
+    transform: translateX(5px);
+  }
+  
+  .attachment-option i {
+    font-size: 20px;
+    color: #e8a7ff;
+    width: 30px;
+    text-align: center;
+    margin-right: 12px;
+  }
+  
+  .attachment-option span {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .emoji-modal {
+    width: 380px;
+    max-height: 500px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .emoji-header {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 16px 16px 0 0;
+  }
+  
+  .emoji-categories {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+  }
+  
+  .emoji-categories::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  .emoji-categories::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 4px;
+  }
+  
+  .category-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    color: #757575;
+    transition: all 0.3s ease;
+    min-width: 40px;
+  }
+  
+  .category-btn:hover, .category-btn.active {
+    background: #f0f0f0;
+    color: #e8a7ff;
+  }
+  
+  .category-btn i {
+    font-size: 18px;
+  }
+  
+  
+  .emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 6px;
+    padding: 15px;
+    overflow-y: auto;
+    max-height: 300px;
+  }
+  
+  .emoji-grid::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .emoji-grid::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 3px;
+  }
+  
+  .emoji-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 22px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .emoji-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.1);
+  }
+  
+  .search-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .search-input-container {
+    position: relative;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 12px 15px 12px 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 25px;
+    outline: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .search-input:focus {
+    border-color: #e8a7ff;
+    box-shadow: 0 0 0 3px rgba(232, 167, 255, 0.1);
+  }
+  
+  .search-input-container i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #757575;
+  }
+  
+  .date-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .date-picker-container label {
+    font-size: 14px;
+    color: #555;
+    white-space: nowrap;
+  }
+  
+  .date-input {
+    padding: 10px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 14px;
+    flex-grow: 1;
+  }
+  
+  .clear-date-btn {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #757575;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0 5px;
+  }
+  
+  .search-results {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-top: 10px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+  }
+  
+  .search-result-item {
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+  }
+  
+  .search-result-item:hover {
+    background: #f8f8f8;
+  }
+  
+  .result-text {
+    margin: 0;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  .result-meta {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  
+  .result-time {
+    font-size: 12px;
+    color: #757575;
+  }
+  
+  .result-date {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 20px;
+    color: #757575;
+    font-style: italic;
+  }
+  
+  .message-bubble.highlight {
+    animation: highlight 2s ease;
+  }
+  
+  @keyframes highlight {
+    0% { background-color: rgba(232, 167, 255, 0.3); }
+    100% { background-color: initial; }
+  }
+  
+  @media (max-width: 768px) {
+    .chat-container {
+      height: 100vh;
+      width: 100%;
+    }
+  
+    .message-bubble {
+      max-width: 85%;
+    }
+  
+    .emoji-modal, .attachment-modal, .search-modal {
+      width: 90%;
+      max-width: 380px;
+    }
+  
+    .emoji-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .date-picker-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .date-input {
+      width: 100%;
+    }
+  }
